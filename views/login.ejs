@@ -1,0 +1,40 @@
+<%- include('includes/head.ejs', {pageT: pageTitle}) %>
+    
+    <link rel="stylesheet" href="/css/signin.css">
+</head>
+    
+    <body>
+        <%- include('includes/navigations.ejs', {path: '/login'}) %>
+        <main>
+            <div class="wrapper fadeInDown">
+                <div id="formContent">
+                    <!-- Tabs Titles -->
+            
+                    <!-- Icon -->
+                    <div class="fadeIn first">
+                        <img src="/assets/images/books.ico" id="icon" alt="User Icon" />
+                    </div>
+            
+                    <!-- Login Form -->
+                    <form action="/login" method="POST">
+                        <input type="email" id="login" class="fadeIn second" name="email" placeholder="email">
+                        <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
+                        <input type="submit" class="fadeIn fourth" value="Log In">
+                        <% if (errorMessage) { %>
+                            <p class="fadeIn fourth" style="color: rgb(243, 36, 36);"><%= errorMessage %></p>
+                        <% } %>
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    </form>
+            
+                    <!-- Remind Passowrd -->
+                    <!-- <div id="formFooter">
+                        <a class="underlineHover" href="/reset">Forgot Password?</a>
+                    </div> -->
+            
+                </div>
+            </div>
+        </main>
+
+<%- include('includes/footer.ejs') %>
+
+        

@@ -1,0 +1,23 @@
+<%- include('includes/head.ejs', {pageT: pageTitle}) %> 
+    <!-- <link rel="stylesheet" href="/css/product-card.css">
+    <link rel="stylesheet" href="/css/products.css"> -->
+</head>
+<body class="bg-light">
+    <%- include('includes/navigations.ejs', {path: path}) %> 
+
+    <main>
+        <% if (products && products.length> 0) { %>
+
+            <div class="d-flex flex-row bd-highlight mb-3 justify-content-evenly flex-wrap pt-4">
+                <% for( let i=0; i < products.length; i++ ) { %>
+                    <div style="margin: 15px;">
+                        <%- include('includes/product-card.ejs', {product: products[i], auth: auth}) %>
+                    </div>
+                <% } %>
+            </div>
+        <% } else { %>
+            <h1>No Products</h1>
+        <% } %>
+    </main>
+
+<%- include('includes/footer.ejs') %> 

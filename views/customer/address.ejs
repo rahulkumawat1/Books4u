@@ -1,0 +1,220 @@
+<%- include('../includes/head.ejs', {pageT: 'checkout'}) %>
+</head>
+
+<body class="bg-light">
+    <%- include('../includes/navigations.ejs', {path: '/address' }) %>
+
+    <div class="container">
+        <div class="py-5 text-center">
+            <h2>Checkout</h2>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-md-4 order-md-2 mb-4">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Your cart</span>
+                    <span class="badge badge-secondary badge-pill"><%= cart.items.length %> </span>
+                </h4>
+                <ul class="list-group mb-3">
+                    <% for( let i = 0; i < cart.items.length; i++ ) { %>
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">
+                                    <%= cart.items[i].title.length> 28? cart.items[i].title.slice(0, 25).trim()+"...": cart.items[i].title %>
+                                </h6>
+                                <small class="text-muted">Quantity: <%= cart.items[i].quantity %></small>
+                            </div>
+                            <span class="text-muted">Rs. <%= cart.items[i].quantity*cart.items[i].price %></span>
+                        </li>
+                    <% } %>
+        
+                    <li class="list-group-item d-flex justify-content-between bg-light">
+                        <span>Total Amount</span>
+                        <strong>Rs. <%= cart.totalPrice %> </strong>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="col-md-8 order-md-1">
+                <h4 class="mb-3">Shipping address</h4>
+                <form class="needs-validation" action="/address" method="POST" novalidate>
+
+                    <div class="mb-3">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
+                        <div class="invalid-feedback">
+                            Valid Name is required.
+                        </div>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="email">Email <span class="text-muted">(Optional)</span></label>
+                        <input type="email" name="emial" class="form-control" id="email" placeholder="you@example.com">
+                        <div class="invalid-feedback">
+                            Please enter a valid email address for shipping updates.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="phone">Phone number</label>
+                        <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone number" required>
+                        <div class="invalid-feedback">
+                            Valid Phone number is required.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="address">Address</label>
+                        <input type="text" name="houseinfo" class="form-control" id="address" placeholder="1234 Main St" required>
+                        <div class="invalid-feedback">
+                            Please enter your shipping address.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
+                        <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5 mb-3">
+                            <label for="country">City</label>
+                            <select class="custom-select d-block w-100" id="country" name="city" required>
+                                <option value="">Choose...</option>
+                                <option value="jaipur">Jaipur</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a valid country.
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="state">State</label>
+                            <select class="custom-select d-block w-100" id="state" name="state" required>
+                                <option value="">Choose...</option>
+                                <option value="rajasthan">Rajasthan</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please provide a valid state.
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="pincode">PIN</label>
+                            <input type="text" class="form-control" name="pincode" id="pincode" placeholder="" required>
+                            <div class="invalid-feedback">
+                                Pin code required.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <hr class="mb-4">
+
+                    <h4 class="mb-3">Payment</h4>
+
+                    <div class="d-block my-3">
+                        <div class="custom-control custom-radio">
+                            <input id="cod" name="paymentMethod" value="COD" type="radio" class="custom-control-input" checked required>
+                            <label class="custom-control-label" for="cod">Cash on delivery</label>
+                        </div>
+
+                        <div class="custom-control custom-radio">
+                            <input id="credit" name="paymentMethod" value="credit" type="radio" class="custom-control-input" 
+                                required>
+                            <label class="custom-control-label" for="credit">Credit card</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input id="debit" name="paymentMethod" value="debit" type="radio" class="custom-control-input" required>
+                            <label class="custom-control-label" for="debit">Debit card</label>
+                        </div>
+                        <!-- <div class="custom-control custom-radio">
+                            <input id="upi" name="paymentMethod" value="upi" type="radio" class="custom-control-input" required>
+                            <label class="custom-control-label" for="upi">UPI</label>
+                        </div> -->
+                    </div>
+                    <div class="my-card-info">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="cc-name">Name on card</label>
+                                <input type="text" class="form-control" id="cc-name" placeholder="">
+                                <small class="text-muted">Full name as displayed on card</small>
+                                <div class="invalid-feedback">
+                                    Name on card is required
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="cc-number">Credit card number</label>
+                                <input type="text" class="form-control" id="cc-number" placeholder="">
+                                <div class="invalid-feedback">
+                                    Credit card number is required
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 mb-3">
+                                <label for="cc-expiration">Expiration</label>
+                                <input type="text" class="form-control" id="cc-expiration" placeholder="">
+                                <div class="invalid-feedback">
+                                    Expiration date required
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="cc-cvv">CVV</label>
+                                <input type="text" class="form-control" id="cc-cvv" placeholder="">
+                                <div class="invalid-feedback">
+                                    Security code required
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <hr class="mb-4">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+                </form>
+            </div>
+        </div>
+
+        
+    </div>
+
+    <script src="/js/global.js"></script>
+    
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script> -->
+    <script src="/js/form-validation.js"></script>
+</body>
+
+<!-- <body>
+    <%- include('../includes/navigations.ejs', {path: '/address'}) %>
+    <main>
+        <h1 class="title">Address</h1>
+
+       <form  class="form" action="/address" method="POST">
+            <% if (errorMessage) { %>
+                <h3 style="color: red;"> <%= errorMessage %> </h3>     
+            <% } %>
+            Full name
+            <input type="text" name="name">
+            Mobile number
+            <input type="text" name="phone">
+            PIN code
+            <input type="text" name="pincode">
+            Flat, House no., Building, Company, Apartment
+            <input type="text" name="houseinfo">
+            City
+            <input type="text" name="city">
+            State
+            <input type="text" name="state">
+            Payment
+            <br>
+            <input type="radio" name="paymentMethod" value="COD" checked>Cash on Delivery
+            
+            <input type="hidden" name='_csrf' value="<%= csrfToken %>">
+            <button type="submit">Submit</button>
+        </form>
+    </main> -->
+
+<%- include('../includes/footer.ejs') %>

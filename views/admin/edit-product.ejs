@@ -1,0 +1,53 @@
+<%- include('../includes/head.ejs', {pageT: pageTitle}) %>
+    </head>
+
+    <body>
+        <%- include('../includes/navigations.ejs', {path: '/admin/edit-product' }) %>
+            <main class="bg-light">
+                <h2 class="text-center mb-3">Edit-Product</h2>
+                <div class="my-form m-auto">
+                    <form class="ms-3 me-3" action="/admin/edit-product/<%= product._id %>" method="POST">
+                        <!-- 2 column grid layout with text inputs for the first and last names -->
+
+
+                        <!-- Text input -->
+                        <div class="form-outline mb-4">
+                            <input type="text" id="form6Example3" class="form-control" name="title" value="<%= product.title %>" placeholder="Title"
+                                required />
+                        </div>
+
+                        <!-- Text input -->
+                        <div class="form-outline mb-4">
+                            <input type="text" id="form6Example5" class="form-control" name="author" value="<%= product.author %>"
+                                placeholder="Author Name" required />
+                        </div>
+
+                        <!-- Text input -->
+                        <div class="form-outline mb-4">
+                            <input type="text" id="form6Example4" class="form-control" name="img_url" value="<%= product.url %>"
+                                placeholder="Image URL" required />
+                        </div>
+
+
+                        <!-- Number input -->
+                        <div class="form-outline mb-4">
+                            <input type="number" id="form6Example6" class="form-control" name="price" value="<%= product.price %>"
+                                placeholder="Price" required />
+                        </div>
+
+                        <!-- Message input -->
+                        <div class="form-outline mb-4">
+                            <textarea class="form-control" id="form6Example7" rows="4" name="desc"
+                                placeholder="Description" required><%= product.desc %></textarea>
+                        </div>
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <!-- Submit button -->
+                        <button type="submit" class="btn btn-primary btn-block mb-4">Submit</button>
+                    </form>
+                </div>
+
+
+            </main>
+    </body>
+
+<%- include('../includes/footer.ejs') %>

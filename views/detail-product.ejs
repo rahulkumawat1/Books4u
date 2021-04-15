@@ -1,0 +1,67 @@
+<%- include('includes/head.ejs', {pageT: pageTitle}) %>
+    <link rel="stylesheet" href="/css/detail-product.css">
+</head>
+
+<body>
+    <%- include('includes/navigations.ejs', {path: "/product/id"}) %>
+
+    <main>
+        <h1 class="text-center">
+            <%= product.title %>
+        </h1>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <img style="margin: 0;" src="<%= product.url %> " alt="<%= product.title %>">
+                </div>
+                <div class="col-sm">
+                    <p class="desc mt-3 me-n3">
+                        <%= product.desc %>
+                    </p>
+
+                    <p><span style="color: rgb(88, 87, 87);">AUTHOR:</span> <%= product.author %> </p>
+
+                    <h3 class="price">Price: <%= product.price %>
+                    </h3>
+
+
+                    <% if (auth == 1) { %>
+                        <a href='<%= "/admin/edit/" + product._id %>' class="btn btn-outline-danger mt-3 mb-4">Edit</a>
+                    <% } else if (auth == 2) {%>
+                        <a href='<%= "/cart/" + product._id %>' class="btn btn-warning mt-3 mb-4">Add to Cart</a>
+
+                    <% } %>
+
+                </div>
+            </div>
+        </div>
+
+        
+    </main>
+
+    <!-- <main class="product">
+        <h1 class="title"><%= product.title %> </h1>
+        <div class="grid">
+            <div>
+                <img src="<%= product.url %> " alt="<%= product.title %>">
+            </div>
+            <div>
+                <p class="desc">
+                    <%= product.desc %>
+                </p>
+
+                <% if (auth == 1) { %>
+                    <%- include('includes/button.ejs', {href: "/admin/edit/" + product._id , btnName: "Edit" , type: "Danger" }) %>
+                <% } else if (auth == 2) {%>
+                    <%- include('includes/button.ejs', {href: "/cart/" + product._id , btnName: "Add to Cart" , type: "Warning" }) %>
+                <% } %>
+
+                <h3 class="price">Price: <%= product.price %>
+                </h3>
+            </div>   
+        </div>
+        
+    </main> -->
+
+<%- include('includes/footer.ejs') %>

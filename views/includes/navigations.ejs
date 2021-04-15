@@ -1,0 +1,64 @@
+<header>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Books4U</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+
+                    <% if (auth == 0) { %>
+                        <li class="nav-item">
+                            <a class='<%= [path=="/"? "active" : "", 'nav-link'].join(' ') %>'  aria-current="page" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class='<%= ['nav-link', path==="/login"? "active" : ""].join(' ') %>' href="/login">LogIn</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class='<%= ['nav-link', path==="/signup"? "active" : ""].join(' ') %>' href="/signup">SignUp</a>
+                        </li>
+                        
+                    <% } else if(auth==1) {%>
+
+                        <li class="nav-item">
+                            <a class='<%= [path==="/admin/home" || path==="/"? "active" : "", 'nav-link'].join(' ') %>' aria-current="page" href="/admin/home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class='<%= [path==="/admin/add-product"? "active" : "", 'nav-link'].join(' ') %>' href="/admin/add-product">Add-Product</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class='<%= [path==="/admin/requests"? "active" : "", 'nav-link'].join(' ') %>' href="/admin/requests">Requests</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class='<%= [path==="/logout"? "active" : "", 'nav-link'].join(' ') %>' href="/logout">Logout</a>
+                        </li>
+                    <% } else if(auth==2) {%>
+
+                        <li class="nav-item">
+                            <a class='<%= [path==="/"? "active" : "", 'nav-link'].join(' ') %>' aria-current="page" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class='<%= [path==="/cart"? "active" : "", 'nav-link'].join(' ') %>' href="/cart">Cart</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class='<%= [path==="/orders"? "active" : "", 'nav-link'].join(' ') %>' href="/orders">Orders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class='<%= [path==="/logout"? "active" : "", 'nav-link'].join(' ') %>' href="/logout">Logout</a>
+                        </li>
+
+                    <% } %>
+                </ul>
+                <form class="d-flex" action="/search" method="POST">
+                    <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search" >
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <button class="btn btn-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>

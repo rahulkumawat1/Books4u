@@ -1,0 +1,27 @@
+body {
+  margin-bottom: 0;
+}
+
+main {
+  min-height: calc(100vh - 160px);
+  padding-top: 15px;
+}
+
+.my-card-info {
+  display: none;
+}
+
+.my-link-disable {
+  pointer-events: none;
+  cursor: default;
+}
+
+.my-form {
+  width: 100%;
+}
+
+@media only screen and (min-width: 600px) {
+  .my-form {
+    width: 50%;
+  }
+}

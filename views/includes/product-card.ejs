@@ -1,0 +1,37 @@
+<!-- <div class="card">
+    <h2>
+        <%= product.title.length> 25? product.title.slice(0, 22).trim()+"...": product.title %>
+    </h2>
+    <img src="<%= product.url %> " alt="">
+    <h3>Price: <%= product.price %>
+    </h3>
+    <% if (auth==2) { %>
+        <%- include('button.ejs', {href: "/product/" + product._id, btnName: "Details" , type: "Success" }) %>
+        <%- include('button.ejs', {href: "/cart/" + product._id , btnName: "Add to Cart" , type: "Warning" }) %>
+    <% } else if(auth==1) { %>
+        <%- include('button.ejs', {href: "/admin/edit-product/" + product._id , btnName: "Edit" ,type: "Success" }) %>
+        <%- include('button.ejs', {href: "/admin/delete-product/" + product._id , btnName: "Delete" ,type: "Danger" }) %>
+    <% } else if(auth==0) { %>
+        <%- include('button.ejs', {href: "/product/" + product._id, btnName: "Details" , type: "Success" }) %>
+    <% } %>
+
+</div> -->
+
+<div class="card text-center" style="width: 16rem;">
+    <h5 class="card-title mt-2">
+        <%= product.title.length> 22? product.title.slice(0, 20).trim()+"..": product.title %>
+    </h5>
+    <img class="card-img-top" src="<%= product.url %>" alt="">
+    <div class="card-body">
+        <% if (auth==2) { %>
+            <a href='<%= "/product/" + product._id %>' class="btn btn-primary">Details</a>
+            <a href='<%= "/cart/" + product._id %>' class="btn btn-warning">Add to Cart</a>
+            
+        <% } else if(auth==1) { %>
+            <a href='<%= "/admin/edit-product/" + product._id %>' class="btn btn-primary">Edit</a>
+            <a href='<%= "/admin/delete-product/" + product._id %>' class="btn btn-danger">Delete</a>
+        <% } else if(auth==0) { %>
+            <a href='<%= "/product/" + product._id %>' class="btn btn-primary">Details</a>
+         <% } %>
+    </div>
+</div>

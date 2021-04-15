@@ -1,0 +1,34 @@
+<%- include('includes/head.ejs', {pageT: 'Reset Password'}) %>
+    
+    <link rel="stylesheet" href="/css/signin.css">
+</head>
+    
+    <body>
+        <%- include('includes/navigations.ejs', {path: '/reset'}) %>
+        <main>
+            <div class="wrapper fadeInDown">
+                <div id="formContent">
+                    <!-- Tabs Titles -->
+            
+                    <!-- Icon -->
+                    <div class="fadeIn first">
+                        <img src="/assets/images/books.ico" id="icon" alt="User Icon" />
+                    </div>
+            
+                    <!-- Login Form -->
+                    <form action="/reset" method="POST">
+                        <p class="fadeIn fourth" style="color: blue;">Reset password link will be send to you via email.</p>
+                        <input type="email" id="login" class="fadeIn second" name="email" placeholder="email">
+                        <input type="submit" class="fadeIn fourth" value="Reset">
+                        <% if (errorMessage) { %>
+                            <p class="fadeIn fourth" style="color: rgb(243, 36, 36);"><%= errorMessage %></p>
+                        <% } %>
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    </form>
+            
+            
+                </div>
+            </div>
+        </main>
+
+<%- include('includes/footer.ejs') %>

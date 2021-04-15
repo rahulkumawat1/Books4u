@@ -1,0 +1,81 @@
+<% for( let i = 0; i < order.order.items.length; i++ ) { %>
+    <div class="bg-white card mb-4 order-list shadow-sm">
+        <div class="gold-members p-4">
+            <a href="#">
+            </a>
+            <div class="row">
+                <div class="col-md-2">
+                    <a href="/product/<%= order.order.items[i]._id %>">
+                        <img class="mr-4" src="<%= order.order.items[i].url %>" alt="Generic placeholder image">
+                    </a>
+                </div>
+                <div class="col-md">
+                    <div class="media">
+                    
+                        <div class="media-body">
+                            <p class="text-gray mb-3" style="color: black;"><i class="icofont-list"></i> ORDER-ID #<%= order._id %> <i style="color: rgb(48, 47, 47);" class="icofont-clock-time ml-2">
+                                        OrderDate- <%= order.order.date %> </i> </p>
+                            <h6>
+                                <a href="/product/<%= order.order.items[i]._id %>" class="text-black">
+                                    <%= order.order.items[i].title %>
+                                </a>
+                            </h6>
+                            <% if (auth == 1) { %>
+                                <form action="/admin/requests/<%= order._id %>" method="POST" class="status">
+                                    <label style="font-weight: bold;" for="status">Status:</label>
+                                    <select class="p-1 me-2" id="status" name="status">
+                                        <option value="0" <%=order.status==0 ? "selected" : null %> >Order</option>
+                                        <option value="1" <%=order.status==1 ? "selected" : null %>>Dispatch</option>
+                                        <option value="2" <%=order.status==2 ? "selected" : null %>>Shipped</option>
+                                        <option value="3" <%=order.status==3 ? "selected" : null %>>Out for delivery</option>
+                                        <option value="4" <%=order.status==4 ? "selected" : null %>>Delievered</option>
+                                    </select>
+                                    <input type="hidden" name='_csrf' value="<%= csrfToken %>">
+                                    <button class="btn btn-primary" type="submit">submit</button>
+                                </form>
+                            <% } else if (auth == 2){ %>
+                                <div class="mb-2">
+                                        <span class="float-right text-<%= order.status %>">
+                                            <span class="dot">•</span>
+                                                <% if (order.status==0) { %>
+                                                    Ordered
+                                                <% } else if(order.status==1) {%>
+                                                    Dispatched
+                                                <% } else if(order.status==2) {%>
+                                                    Shipped
+                                                <% } else if(order.status==3) {%>
+                                                    Out for delivery
+                                                <% } else {%>
+                                                    Delievered
+                                                <% } %>
+                                        </span>
+                                </div>
+                            <% } %>
+                            
+                            
+                            <p class="text-gray mb-1"><i class="icofont-price"></i> Price - <%= order.order.items[i].price %>
+                            </p>
+                            <p class="text-dark">Quantity - <%= order.order.items[i].quantity %>
+                            </p>
+                            <hr>
+
+                            <% if (auth == 2 && order.status != 4) { %>
+                                <div class="float-right">
+                                    <!-- <a class="btn btn-sm btn-outline-primary" href="#">class="icofont-headphone-alt"></i> HELP</a> -->
+                                    <a class="btn btn-danger btn-sm" href="/order-cancel/<%= order._id %>"><i class="icofont-cancel"></i>
+                                        CANCEL</a>
+                                    <!-- <p style="color: red; display: inline; margin-left: 10px;">*Cancelling an item in an order will cancel all items in that order.</p> -->
+                                </div>
+                            <% } %>
+                            <p class="mb-0 text-black text-primary pt-2"><span class="text-black font-weight-bold"> Total
+                                    Paid:</span> Rs. <%= order.order.items[i].price*order.order.items[i].quantity %>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+    
+        </div>
+    </div>
+<% } %>

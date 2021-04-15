@@ -1,0 +1,77 @@
+<div class="row mb-4">
+    <div class="col-md-5 col-lg-3 col-xl-3">
+        <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0 text-center">
+            <a href="/product/<%= product._id %> ">
+                <img class="img-fluid w-75" src="<%= product.url %>" alt="<%= product.title %>">
+            </a>
+            
+        </div>
+    </div>
+    <div class="col-md-7 col-lg-9 col-xl-9">
+        <div>
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h5><%= product.title %></h5>
+                    <p class="mb-2 text-muted text-uppercase small">Author - <%= product.author %> </p>
+                    <p class="mb-2 text-muted text-uppercase small">Language - English</p>
+                    <p class="mb-4 text-muted text-uppercase small">Contry of origin - India</p>
+                    <!-- <p class="mb-2 text-muted text-uppercase small">Color: blue</p>
+                    <p class="mb-3 text-muted text-uppercase small">Size: M</p> -->
+                </div>
+                <!-- <div>
+                    <div class="def-number-input number-input safari_only mb-0 w-100">
+                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                            class="minus">-</button>
+                        <input class="quantity" min="0" name="quantity" value="1" type="number">
+                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                            class="plus">+</button>
+                    </div>
+
+                </div> -->
+            </div>
+            <form action="/handle_qty/<%= product._id %> " method="POST">
+                <label for="qty">Qty:</label>
+                <select id="qty" name="qty">
+                    <% for( let i=1; i < 10; i++ ) { %>
+                        <option value="<%= i %> " <%=(i==product.quantity)? "selected" : null %> ><%= i %>
+                        </option>
+                        <% } %>
+                </select>
+                <input type="hidden" name='_csrf' value="<%= csrfToken %>">
+                <input class="btn btn-warning ms-3 btn-sm" type="submit">
+            </form>
+            <div class="d-flex justify-content-between align-items-center mt-5">
+                <div>
+            
+                    <a href='<%= "/delete/" + product._id %>' class="btn btn-danger">Delete</a>
+                </div>
+                <p class="mb-0"><span><strong>Rs. <%= product.price %></strong></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- <div class="cart-product">
+    <div>
+        <img src="<%= product.url %> " alt="<%= product.title %> ">
+    </div>
+    <div>
+        <h2><%= product.title %> </h2>
+
+        <form action="/handle_qty/<%= product._id %> " method="POST">
+            <label for="qty">Qty:</label>
+            <select id="qty" name="qty">
+                <% for( let i = 1; i < 10; i++ ) { %>
+                    <option value="<%= i %> " <%= (i==product.quantity)? "selected": null %> ><%= i %> </option>
+                <% } %>
+            </select>
+            <input type="hidden" name='_csrf' value="<%= csrfToken %>">
+            <input type="submit">
+        </form>
+        <h2>Price: <%= product.price %> </h2>
+        <%- include('button.ejs', {href: "/delete/" + product._id, btnName: "Delete" , type: "Danger" }) %>
+    </div>
+</div> -->
