@@ -1,6 +1,6 @@
 # Books4u
-
-[https://books4u-shop.herokuapp.com/](https://books4u-shop.herokuapp.com/)
-
+Website to buy books with admin and customer functionalities.
 
 Using NodeJS, Express, EJS...
+
+Note - Older Heroku Deployment is expired, new deployment is in pipeline ⏲️ 
